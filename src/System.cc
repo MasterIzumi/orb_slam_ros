@@ -57,12 +57,12 @@ System::System(const string &strVocFile, const string &strSettingsFile, const eS
        exit(-1);
     }
 
-
     //Load ORB Vocabulary
     cout << endl << "Loading ORB Vocabulary. This could take a while..." << endl;
-
+    cout << "Loading: " << strVocFile << endl;
     mpVocabulary = new ORBVocabulary();
-    bool bVocLoad = mpVocabulary->loadFromTextFile(strVocFile);
+    //bool bVocLoad = mpVocabulary->loadFromTextFile(strVocFile);
+    bool bVocLoad = mpVocabulary->loadFromBinaryFile(strVocFile);
     if(!bVocLoad)
     {
         cerr << "Wrong path to vocabulary. " << endl;
@@ -78,8 +78,8 @@ System::System(const string &strVocFile, const string &strSettingsFile, const eS
     mpMap = new Map();
 
     //Create Drawers. These are used by the Viewer
-    mpFrameDrawer = new FrameDrawer(mpMap);
-    mpMapDrawer = new MapDrawer(mpMap, strSettingsFile);
+    mpFrameDrawer = new FrameDrawer(mpMap);  // 画图的
+    mpMapDrawer = new MapDrawer(mpMap, strSettingsFile); // 画pangolin的
 
     //Initialize the Tracking thread
     //(it will live in the main thread of execution, the one that called this constructor)
@@ -102,6 +102,7 @@ System::System(const string &strVocFile, const string &strSettingsFile, const eS
         mpTracker->SetViewer(mpViewer);
     }
     
+    // Initialize the Rviz viewer and launch
     mpSlamDataPub = new SlamDataPub(this, mpFrameDrawer, mpMapDrawer, mpTracker, strSettingsFile, mpMap);  //zl
     mptSlamDataPub = new thread(&SlamDataPub::Run, mpSlamDataPub);
     mpTracker->SetSlamDataPub(mpSlamDataPub);

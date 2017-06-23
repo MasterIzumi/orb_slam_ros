@@ -31,7 +31,7 @@ namespace ORB_SLAM2
 {
 
 KeyFrameDatabase::KeyFrameDatabase (const ORBVocabulary &voc):
-    mpVoc(&voc)
+    mpVoc(&voc) //把mpVocabulary指针赋给mpVoc
 {
     mvInvertedFile.resize(voc.size());
 }

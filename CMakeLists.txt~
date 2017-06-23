@@ -136,7 +136,7 @@ src/Initializer.cc
 src/Viewer.cc
 src/SlamDataPub.cc
 )
-target_link_libraries(mono_kitti_node 
+target_link_libraries(mono_node_KITTI 
 ${catkin_LIBRARIES}
 ${OpenCV_LIBS}
 ${EIGEN3_LIBS}

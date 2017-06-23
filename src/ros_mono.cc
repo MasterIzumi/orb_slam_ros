@@ -41,6 +41,9 @@ public:
     ORB_SLAM2::System* mpSLAM;
 };
 
+long spinCnt=0;
+double t_temp=0;
+
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "Mono");
@@ -53,7 +56,7 @@ int main(int argc, char **argv)
         return 1;
     }    
 
-    string voc_dir = "/home/zl/catkin_ws/src/parkingEnvSensing/Vocabulary/ORBvoc.txt";
+    string voc_dir = "/home/zl/catkin_ws/src/parkingEnvSensing/Vocabulary/ORBvoc.bin";
     string config_dir = argv[1];
     
     // Create SLAM system. It initializes all system threads and gets ready to process frames.
@@ -103,6 +106,9 @@ void ImageGrabber::GrabImage(const sensor_msgs::ImageConstPtr& msg)
     cout << "Image reading time = " << timread << "s, freqency = " << 1/timread << "Hz" << endl;
     cout << "Tracking time = " << ttrack << "s, freqency = " << 1/ttrack << "Hz" << endl; 
     cout << "ALL cost time = " << tall << "s, freqency = " << 1/tall << "Hz\n" << endl; 
+    t_temp = (tall + t_temp*spinCnt)/(1+spinCnt);
+    cout << "Avg. time = " << t_temp << "s, freqency = " << 1/t_temp << "Hz\n" << endl; 
+    spinCnt++;
     
 }
 

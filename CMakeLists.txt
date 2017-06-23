@@ -78,7 +78,7 @@ ${Pangolin_INCLUDE_DIRS}
 )
 
 # Stereo
-add_executable(stereo_kitti_node 
+add_executable(stereo_node_KITTI 
 src/ros_stereo.cc
 src/System.cc
 src/Tracking.cc
@@ -101,7 +101,7 @@ src/Initializer.cc
 src/Viewer.cc
 src/SlamDataPub.cc
 )
-target_link_libraries(stereo_kitti_node 
+target_link_libraries(stereo_node_KITTI 
 ${catkin_LIBRARIES}
 ${OpenCV_LIBS}
 ${EIGEN3_LIBS}
@@ -113,7 +113,7 @@ ${PCL_LIBRARIES}
 
 
 # Mono
-add_executable(mono_kitti_node 
+add_executable(mono_node_KITTI 
 src/ros_mono.cc
 src/System.cc
 src/Tracking.cc
@@ -136,7 +136,7 @@ src/Initializer.cc
 src/Viewer.cc
 src/SlamDataPub.cc
 )
-target_link_libraries(mono_kitti_node 
+target_link_libraries(mono_node_KITTI 
 ${catkin_LIBRARIES}
 ${OpenCV_LIBS}
 ${EIGEN3_LIBS}
