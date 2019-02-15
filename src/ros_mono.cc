@@ -49,14 +49,14 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "Mono");
     ros::start();
 
-    if(argc != 2)
+    if(argc != 3)
     {
-        cerr << endl << "Usage: rosrun ORB_SLAM2 Mono path_to_vocabulary path_to_settings" << endl;        
+        cerr << endl << "Usage: rosrun ORB_SLAM2 Mono path_to_settings" << endl;
         ros::shutdown();
         return 1;
     }    
-
-    string voc_dir = "/home/zl/catkin_ws/src/parkingEnvSensing/Vocabulary/ORBvoc.bin";
+    
+    string voc_dir = argv[2];
     string config_dir = argv[1];
     
     // Create SLAM system. It initializes all system threads and gets ready to process frames.
